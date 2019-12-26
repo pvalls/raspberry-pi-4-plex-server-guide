@@ -148,6 +148,8 @@ To obtain this credentials, follow the steps [here](https://rclone.org/drive/#ma
 
 ### 6. Install Plexdrive. See [PlexDrive on Github](https://github.com/dweidenfeld/plexdrive).
 
+With Rclone it is possible to mount your drive as a local filesystem. Yet, Plexdrive is a necessary alternative because it is engineered to use cache so that Plex Media Server file requests do not exceed the Google Drive API limit. Otherwise, you could get a 24h ban and you wouldn't be able use your google drive account for an entire day (this happened to me repeatedly).
+
 1. To install PlexDrive, first you need to install its dependencies, i.e to have *FUSE (Filesystem in Userspace)* installed.
 
 	`$ sudo apt-get install fuse`
@@ -198,19 +200,20 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
 
 	`$ cd /usr/local/bin`
 
-6. Change ownership and execution of the downloaded plexdrive file
+6. Change ownership and execution rights of the downloaded plexdrive file
 
 	`$ sudo chown root:root /usr/local/bin/plexdrive`
 
 	`$ sudo chmod 755 /usr/local/bin/plexdrive`
 
-7. Create root direcotry and run plexdrive to mount the plexdrive virtual file system volume.
+7. Create root directory and run plexdrive to mount the plexdrive virtual file system volume.
 
 	`$ mkdir /mnt/plexdrive/`
 	`$ /usr/local/bin/plexdrive mount /mnt/plexdrive/`
 	
 	You will be promted to enter your google drive API remote *client_id* and *secret* and to follow a link to get your google authorization code. The dialog looks like this:
 	![](imgs/screenshot2.jpg)
+	Congratulations, you have succesfully configured a virtual filesystem
 
 ### 7. Configure your Plex Media Server libraries to read from the plexdrive directory
 
