@@ -7,8 +7,8 @@
 
 The following is a detailed guide on how I turned my [*Raspberry Pi 4*](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) into a [*Plex Media Server*](https://www.plex.tv) with an unlimited cloud storage Google Drive account + [*rclone*](https://github.com/rclone/rclone) + [*PlexDrive*](https://github.com/dweidenfeld/plexdrive).
 
-Raspberry Pi 4 b | Plex Media Server | PlexDrive | Unlimited Google Drive
-:-------------------------:|:-------------------------: |:-------------------------:|:-------------------------: |:-------------------------:
+Raspberry Pi 4 b           |  Plex Media Server         | PlexDrive                 | Unlimited Google Drive
+:-------------------------:|:-------------------------: |:-------------------------:|:-------------------------:
 ![](imgs/raspberry-logo.jpg)   |  ![](imgs/PLEX-logo.jpg) | ![](imgs/PlexDrive-Logo.png) | ![](imgs/Google-Drive-Logo.png)
 
 ## Purpose of this guide. What is Plex?
