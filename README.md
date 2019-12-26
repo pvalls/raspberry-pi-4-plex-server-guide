@@ -7,9 +7,9 @@
 
 The following is a detailed guide on how I turned my [*Raspberry Pi 4*](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) into a [*Plex Media Server*](https://www.plex.tv) with an unlimited cloud storage Google Drive account + [*rclone*](https://github.com/rclone/rclone) + [*PlexDrive*](https://github.com/dweidenfeld/plexdrive).
 
-<!--Raspberry Pi 4 b | Plex Media Server | PlexDrive | Unlimited Google Drive
+Raspberry Pi 4 b | Plex Media Server | PlexDrive | Unlimited Google Drive
 :-------------------------:|:-------------------------: |:-------------------------:|:-------------------------: |:-------------------------:
-![](imgs/raspberry-logo.jpg)   |  ![](imgs/PLEX-logo.jpg) | ![](imgs/PlexDrive-Logo.png) | ![](imgs/Google-Drive-Logo.png)-->
+![](imgs/raspberry-logo.jpg)   |  ![](imgs/PLEX-logo.jpg) | ![](imgs/PlexDrive-Logo.png) | ![](imgs/Google-Drive-Logo.png)
 
 ## Purpose of this guide. What is Plex?
 This guide lets you create your own streaming service. Your favorite movies, TV Shows, music, web shows and more, all beautifully organized and streamed from the cloud to any of your devices.
@@ -161,23 +161,26 @@ To obtain this credentials, follow the steps [here](https://rclone.org/drive/#ma
 	`$ sudo nano plexdrive.service`
 	
 	Within the nano editor, paste this:
-> 	# /etc/systemd/system/plexdrive.service
-> 
-> [Unit]
-> Description=Plexdrive
-> AssertPathIsDirectory=/mnt/plexdrive
-> After=network-online.target
-> 
-> [Service]
-> Type=simple
-> ExecStart=/usr/bin/plexdrive mount -v 2 /mnt/plexdrive
-> ExecStop=/bin/fusermount -u /mnt/plexdrive
-> Restart=on-abort
-> 
-> [Install]
-> WantedBy=default.target
 
-	Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
+ ```
+ # /etc/systemd/system/plexdrive.service
+
+ [Unit]
+ Description=Plexdrive
+ AssertPathIsDirectory=/mnt/plexdrive
+ After=network-online.target
+ 
+ [Service]
+ Type=simple
+ ExecStart=/usr/bin/plexdrive mount -v 2 /mnt/plexdrive
+ ExecStop=/bin/fusermount -u /mnt/plexdrive
+ Restart=on-abort
+ 
+ [Install]
+ WantedBy=default.target
+ ```
+
+Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
 
 3. Check that the file was created correctly by printing its content to standard output
 
