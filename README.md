@@ -226,7 +226,26 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
 	
 Congratulations! Plex will analyze, organize and load metadata for all the media files on your drive and serve them for streaming on demand to any of your devices! 🎉🎉
 
-### 8.Comments & issues
+### 8. Plex Server Software updates
+When Plex releases a new version of their software, how to update you Plex Media Server to the latest version?
+
+When there is a new software update available, Plex will notify you in the main page of the online service. To upgrade, do the following:
+
+1. Access your Raspberry Pi Remotely.
+2. Open Plex Server from the Rasberry browser.
+2. Click on the available software update promt.
+3. Plex will download the new application installation package: `plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb`
+4. Run the installation with the command:
+```
+$ sudo apt install /home/pi/Downloads/plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb
+```
+5. Finally, restart the Plex Media Server with the command:
+```
+$ sudo systemctl restart plexmediaserver
+```
+
+
+### 9.Comments & issues
 
 If your raspberry pi is rebooted or suffers any probelm, just run plexdrive and Plex Media Server again
 
