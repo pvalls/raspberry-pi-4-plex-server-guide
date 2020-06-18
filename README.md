@@ -234,7 +234,7 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
 
   ```bash
   $ mkdir /mnt/plexdrive/
-  $ /usr/local/bin/plexdrive mount /mnt/plexdrive/
+  $ sudo ./plexdrive mount -c /root/.plexdrive -o allow_other /mnt/plexdrive/
   ```
 
   You will be promted to enter your google drive API remote *client_id* and *secret* and to follow a link to get your google authorization code. The dialog looks like this:
