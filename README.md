@@ -89,10 +89,10 @@ Your media can be streamed and played  via:
 ## Install Plex Media server
 1. Now before we install the Plex Media Server software to the Raspberry Pi, we first need to ensure our operating system is up to date by running the following two commands.
 
-	```bash
- $ sudo apt-get update
-	 $ sudo apt-get upgrade
-	```
+   ```bash
+   $ sudo apt-get update
+   $ sudo apt-get upgrade
+   ```
 	
 2. To install the Plex packages to the Raspberry Pi, we will need to add the official Plex package repository. Before we do that we need to install the “apt-transport-https” package, this package allows the “apt” package manager to retrieve packages over the “https” protocol that the Plex repository uses.
 
