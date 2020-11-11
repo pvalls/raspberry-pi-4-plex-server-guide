@@ -102,49 +102,49 @@ Your media can be streamed and played  via:
 
 3. Let’s now add the Plex repositories to the “apt” package managers key list. This key is used to ensure the files that you are downloading are in fact from that repository and signed by that key.
 
-  ```bash
-  $ curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
-  ```
+   ```bash
+   $ curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
+   ```
 
 4. With the Plex GPG key now added, we can finally add the official plex repository to the sources list by running the following command.
 
-  ```bash
-  $ echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
-  ```
+   ```bash
+   $ echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+   ```
 
 5. As we have just added a new repository to our sources, we will need to run the “update” command again to refresh the package list.
 
-  ```bash
-  $ sudo apt-get update
-  ```
+   ```bash
+   $ sudo apt-get update
+   ```
 
 6. Now that we have set up our Raspberry Pi so that it can read from Plex’s official package repositories we can go ahead and finally install the Plex Media server package to the Pi. To install the “plexmediaserver” package, go ahead and run the command below.
 
-  ```bash
-  $ sudo apt-get install plexmediaserver
-  ```
+   ```bash
+   $ sudo apt-get install plexmediaserver
+   ```
 
 7. By default, the Plex Media Server package will utilize a user named “plex“. To reduce the chances of dealing with annoying permission issues, we will change the server’s default file so that it utilizes the “pi” user instead.
 
-  ```bash
-  $ sudo nano /etc/default/plexmediaserver
-  ```
+   ```bash
+   $ sudo nano /etc/default/plexmediaserver
+   ```
 
 8. Within this file change the PLEX_MEDIA_SERVER_USER line from plex to pi as we have shown in our example below. Find:
 
-  > export PLEX_MEDIA_SERVER_USER=plex
+   > export PLEX_MEDIA_SERVER_USER=plex
 
-  And replace with:
+   And replace with:
 
-  > export PLEX_MEDIA_SERVER_USER=pi
+   > export PLEX_MEDIA_SERVER_USER=pi
 
-  Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
+   Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
 
 9. As we have made changes to the “default” file, we will need to restart the “plexmediaserver” service. Restarting the service ensures that it loads in our changes and starts using the “pi” user.
 
-  ```bash
-  $ sudo systemctl restart plexmediaserver
-  ```
+   ```bash
+   $ sudo systemctl restart plexmediaserver
+   ```
 
 10. Now the Plex Media Server app appears on the *Menu->Multimedia*. I suggest creating a desktop shortcut.
 
