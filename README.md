@@ -3,7 +3,7 @@
 
 
 
-# Raspberry Pi 4 as Plex Media Server with rclone + PlexDrive. A Complete How-To guide
+# Raspberry Pi 4 as Plex Media Server with  PlexDrive. A Complete How-To guide
 
 The following is a detailed guide on how I turned my [*Raspberry Pi 4*](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) into a [*Plex Media Server*](https://www.plex.tv) with an unlimited cloud storage Google Drive account + [*rclone*](https://github.com/rclone/rclone) + [*PlexDrive*](https://github.com/dweidenfeld/plexdrive).
 
@@ -26,7 +26,7 @@ Your media can be streamed and played  via:
 - Native Desktop app with downloads and offline mode
 	- [Windows Plex app](https://www.plex.tv/media-server-downloads/#plex-app)
 	- [macOS Plex app](https://www.plex.tv/media-server-downloads/#plex-app)
-- TV Plex apps
+- TV Plec Client apps
 	-  [AndroidTV app](https://www.plex.tv/media-server-downloads/#plex-app)
 	-  [AppleTV app](https://www.plex.tv/media-server-downloads/#plex-app)
 	-  [Amazon FireTV app](https://www.plex.tv/media-server-downloads/#plex-app)
@@ -51,9 +51,9 @@ Your media can be streamed and played  via:
 -  **Raspberry Pi model 4** with the Raspbian Linux distribution. The raspberry model used in this guide is the *Raspberry Pi 4 b - 4GB RAM* running on a 32GB SD Card. The Raspberry will be plugged in 24/7.(The electric bill is around $5-$10/year). I suggest buying a [Raspberry4 kit on amazon](https://www.amazon.com/CanaKit-Raspberry-4GB-Basic-Kit/dp/B07TYK4RL8/ref=as_li_ss_tl?ie=UTF8&th=1&linkCode=sl1&tag=dealz04a9-20&linkId=707cb7b8a0b8cb55855d836fd4b03385&language=en_US).
 
 
--   A subscription to **Google Drive**, preferrably an unlimited cloud storage account (*.edu* or *business account*). Any other [rclone](https://rclone.org) compatible cloud storage service also works.
+-   A subscription to **Google Drive**, preferrably an unlimited cloud storage account (*.edu* or *business account*). Any other [rclone](https://rclone.org)/[PlexDrive](https://github.com/plexdrive/plexdrive) compatible cloud storage service also works.
 
-- **Your own content** uploaded to the cloud or the means for aquiring the content that you'll want to stream. Check out this ["Best torrent sites" article](https://www.adslzone.net/reportajes/torrent-2019).
+- **Your own content** uploaded to the cloud or the means for aquiring the content that you'll want to stream.
 
 
 - **Patience, it pays off in the end**.
@@ -82,8 +82,11 @@ Your media can be streamed and played  via:
 		$ sudo apt-get install real-vnc-viewer
 		$ sudo raspi-config #turn on vnc remote access
 		```
+		
+		If you are more advanced and comfortable with linux terminal, you may simply set up your raspberry for ssh connection. I recommend using services such as [ngrok](https://ngrok.com) or [no-ip](https://www.noip.com).
+	
 
-***Note**: We use Raspbian because it is the official and most supported, stable and hardware-compatible distro for the Raspberry. It is also very lightweight.
+>  **Note**: We use Raspbian because it is the official and most supported, stable and hardware-compatible distro for the Raspberry. It is also very lightweight.
 
 
 ## Install Plex Media server
@@ -148,20 +151,11 @@ Your media can be streamed and played  via:
 
 10. Now the Plex Media Server app appears on the *Menu->Multimedia*. I suggest creating a desktop shortcut.
 
-
-### 4. Install rclone.
-
-To install rclone on Linux/macOS/BSD systems with a script installation, run:
-
-```bash
-$ curl https://rclone.org/install.sh | sudo bash
-```
-
-### 5. Create your own Google Drive API OAuth *client_id* and *secret*.
+### 4. Create your own Google Drive API OAuth *client_id* and *secret*.
 
 To obtain this credentials, follow the steps [here](https://rclone.org/drive/#making-your-own-client-id).
 
-### 6. Install Plexdrive. See [PlexDrive on Github](https://github.com/dweidenfeld/plexdrive).
+### 5. Install Plexdrive. See [PlexDrive on Github](https://github.com/dweidenfeld/plexdrive).
 
 With Rclone it is possible to mount your drive as a local filesystem. Yet, Plexdrive is a necessary alternative because it is engineered to use cache so that Plex Media Server file requests do not exceed the Google Drive API limit. Otherwise, you could get a 24h ban and you wouldn't be able use your google drive account for an entire day (this happened to me repeatedly).
 
@@ -216,11 +210,10 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
   $ wget https://github.com/dweidenfeld/plexdrive/releases/download/5.0.0/plexdrive-linux-arm7
   ```
 
-5. Move the downloaded file to the user's bin folder and change directory to it
+5. Move the downloaded file to the user's bin folder
 
   ```bash
   $ sudo mv plexdrive-linux-arm7 /usr/local/bin/plexdrive
-  $ cd /usr/local/bin
   ```
 
   Change ownership and execution rights of the downloaded plexdrive file
@@ -230,18 +223,21 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
   $ sudo chmod 755 /usr/local/bin/plexdrive
   ```
 
-6. Create root directory and run plexdrive to mount the plexdrive virtual file system volume.
+6. Create root directory and run plexdrive to mount the plexdrive virtual file system volume
 
   ```bash
   $ mkdir /mnt/plexdrive/
   $ sudo ./plexdrive mount -c /root/.plexdrive -o allow_other /mnt/plexdrive/
+  $ sudo /usr/local/bin/plexdrive -o allow_other -v 2 --max-chunks=50 mount -c /root/.plexdrive /mnt/plexdrive
   ```
 
-  You will be promted to enter your google drive API remote *client_id* and *secret* and to follow a link to get your google authorization code. The dialog looks like this:
+ 
+
+You will be promted to enter your google drive API remote *client_id* and *secret* and to follow a link to get your google authorization code. The dialog looks like this:
   ![](imgs/screenshot2.jpg)
   Congratulations, you have succesfully configured a virtual filesystem
 
-### 7. Configure your Plex Media Server libraries to read from the plexdrive directory
+### 6. Configure your Plex Media Server libraries to read from the plexdrive directory
 
 1. Start Plex Media server
 2. Login to your Plex account
@@ -251,26 +247,38 @@ Once done, save and exit the file by pressing Ctrl + X then pressing Y and press
 
 Congratulations! Plex will analyze, organize and load metadata for all the media files on your drive and serve them for streaming on demand to any of your devices! 🎉🎉
 
-### 8. Plex Server Software updates
-When Plex releases a new version of their software, how to update you Plex Media Server to the latest version?
+### 7. Plex Server Software updates
+For Linux systems, automatic updates are not supported by Plex. Then, when Plex releases a new version of their software, how to update you Plex Media Server to the latest version? 
 
-When there is a new software update available, Plex will notify you in the main page of the online service. To upgrade, do the following:
+When there is a new software update available, Plex will notify you in the main page of the online service. 
 
-1. Access your Raspberry Pi Remotely.
-2. Open Plex Server from the Rasberry browser.
-2. Click on the available software update promt.
-3. Plex will download the new application installation package: `plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb`
-4. Run the installation with the command:
-```bash
-$ sudo apt install /home/pi/Downloads/plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb
-```
-5. Finally, restart the Plex Media Server with the command:
-```bash
-$ sudo systemctl restart plexmediaserver
-```
+* To install new updates automatically, check out [mrwolf/plexupdate](https://github.com/mrworf/plexupdate).
 
+* Alternatively, to upgrade manually, do:
 
-### 9.Comments & issues
+    ```bash
+    $ sudo apt-get upgrade plexmediaserver
+    $ sudo systemctl restart plexmediaserver
+    ```
+
+    If you don't have plexmediaserver repository set up in the package managers key list, follow steps at [Install Plex Media server](#Install-Plex-Media-server) or follow this manual steps:
+
+    2. Open Plex Server from the Rasberry browser and click on the available software update promt, or download latest release directly with `wget`.
+
+    3. Plex will download the new application installation package: `plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb`
+
+    3. Run the installation with the command:
+
+       ```bash
+       $ sudo apt install /home/pi/Downloads/plexmediaserver_1.18.7.2457-77cb9455c_armhf.deb
+       ```
+    5. Finally, restart the Plex Media Server with the command:
+
+       ```bash
+       $ sudo systemctl restart plexmediaserver
+       ```
+
+### 8.Comments & issues
 
 If your raspberry pi is rebooted or suffers any probelm, just run plexdrive and Plex Media Server again.
 
