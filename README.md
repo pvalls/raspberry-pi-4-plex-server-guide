@@ -278,14 +278,6 @@ When there is a new software update available, Plex will notify you in the main 
        $ sudo systemctl restart plexmediaserver
        ```
 
-### 8.Comments & issues
-
-If your raspberry pi is rebooted or suffers any probelm, just run plexdrive and Plex Media Server again.
-
-```bash
-$ /usr/local/bin/plexdrive mount /mnt/plexdrive/
-$ sudo service plexmediaserver start
-```
 ### Command cheat sheet
 
 ```
