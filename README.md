@@ -167,11 +167,11 @@ With Rclone it is possible to mount your drive as a local filesystem. Yet, Plexd
 	
 2. Now we will create a systemd startup script for automatic startup on boot.
 
-  ```bash
-  $ cd /etc/systemd/system/
-  $ sudo touch plexdrive.service
-  $ sudo nano plexdrive.service
-  ```
+   ```bash
+   $ cd /etc/systemd/system/
+   $ sudo touch plexdrive.service
+   $ sudo nano plexdrive.service
+   ```
 
   Within the nano editor, paste this:
 
@@ -193,7 +193,7 @@ With Rclone it is possible to mount your drive as a local filesystem. Yet, Plexd
  WantedBy=default.target
  ```
 
-Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
+ Once done, save and exit the file by pressing Ctrl + X then pressing Y and pressing ENTER.
 
 3. Check that the file was created correctly by printing its content to standard output
 
