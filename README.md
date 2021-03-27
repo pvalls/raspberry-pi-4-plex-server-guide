@@ -5,7 +5,7 @@
 
 # Raspberry Pi 4 as Plex Media Server with  PlexDrive. A Complete How-To guide
 
-The following is a detailed guide on how I turned my [*Raspberry Pi 4*](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) into a [*Plex Media Server*](https://www.plex.tv) with an unlimited cloud storage Google Drive account + [*rclone*](https://github.com/rclone/rclone) + [*PlexDrive*](https://github.com/dweidenfeld/plexdrive).
+The following is a detailed guide on how I turned my [*Raspberry Pi 4*](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) into a [*Plex Media Server*](https://www.plex.tv) with an unlimited cloud storage Google Drive account via [*PlexDrive*](https://github.com/dweidenfeld/plexdrive).
 
 Raspberry Pi 4 b           |  Plex Media Server         | PlexDrive                 | Unlimited Google Drive
 :-------------------------:|:-------------------------: |:-------------------------:|:-------------------------:
